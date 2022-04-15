@@ -1,0 +1,26 @@
+# Programatic way to create instance in aws
+
+
+# Variables for access and secret key
+variable "aws_access_key" {}
+variable "aws_secret_key" {}
+
+
+# Provider Info
+provider "aws" {
+  region     = "us-east-1"
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret_key
+}
+
+# Ansible Master
+resource "aws_instance" "ansible-master" {
+   ami = "ami-02358d9f5245918a3"
+   instance_type= "t2.micro"
+   subnet_id = "subnet-086da6a52c5c6d04e"
+   vpc_security_group_ids = ["sg-01e63e4bed8e29708"]
+   key_name= "manish_key"
+    tags = {
+      Name= "Ansible Master"
+    }
+}
